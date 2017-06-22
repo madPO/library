@@ -81,7 +81,8 @@ namespace application.Controllers
                 {
                     using (ISession session = new NHibernateHelper().OpenSession())
                     {
-                        session.SaveOrUpdate(model);
+                        session.Update(model);
+                        session.Flush();
                     }
                     return RedirectToAction("Index");
                 }
@@ -90,16 +91,15 @@ namespace application.Controllers
         }
 
         // GET: Books/Delete/5
-        public string Delete(int id)
+        public ActionResult Delete(int id)
         {
-            return "Без колекшена";
-        }
-
-        // POST: Books/Delete/5
-        [HttpPost]
-        public string Delete(int id, FormCollection collection)
-        {
-            return "С колекшеном";
+            using (ISession session = new NHibernateHelper().OpenSession())
+            {
+                Books book = session.QueryOver<Books>().Where(x => x.Id == id).SingleOrDefault();
+                session.Delete(book);
+                session.Flush();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

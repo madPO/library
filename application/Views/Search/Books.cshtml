@@ -1,0 +1,66 @@
+﻿@model application.Models.SearchViewBooks
+
+@{
+    ViewBag.Title = "Поиск по книгам";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+<div class="row">
+    <label class="medium-2 columns">
+        Поиск по
+        @Html.DropDownListFor(m => m.Type_id, Model.Types, "Тип поиска")
+    </label>
+    <label class="medium-10 columns">
+        Текст поиска
+        @Html.EditorFor(m => m.Text)
+    </label>
+    <button style="width: 100%">Register</button>
+</div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Название книги
+        </th>
+        <th>
+            Автор книги
+        </th>
+        <th>
+            Издатель
+        </th>
+        <th>
+            Дата печати
+        </th>
+        <th>
+            Количество в библиотеке
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Result) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publisher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", "Books", new { id = item.Id }, null) |
+            @Html.ActionLink("Описание", "Details", "Books", new { id = item.Id }, null) |
+            @Html.ActionLink("Удалить", "Delete", "Books", new { id = item.Id }, null)
+        </td>
+    </tr>
+}
+
+</table>
