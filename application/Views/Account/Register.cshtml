@@ -1,0 +1,46 @@
+﻿@model application.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Регистрация нового пользователя</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table>
+        <tr>
+            <td>@Html.LabelFor(m => m.UserName)</td>
+            <td>@Html.EditorFor(m => m.UserName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Password)</td>
+            <td>@Html.EditorFor(m => m.Password)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.ConfirmPassword)</td>
+            <td>@Html.EditorFor(m => m.ConfirmPassword)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Name)</td>
+            <td>@Html.EditorFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Phone)</td>
+            <td>@Html.EditorFor(m => m.Phone)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Address)</td>
+            <td>@Html.EditorFor(m => m.Address)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.group_id)</td>
+            <td>@Html.DropDownListFor(m => m.group_id, Model.Groups, "Выберите группу пользователя")</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button style="width: 100%">Register</button></td>
+        </tr>
+    </table>
+}
