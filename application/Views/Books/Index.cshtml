@@ -1,0 +1,58 @@
+﻿@model IEnumerable<application.Models.Books>
+
+@{
+    ViewBag.Title = "Список книг";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Зарегистрировать новую книгу", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Название книги
+        </th>
+        <th>
+            Автор книги
+        </th>
+        <th>
+            Издатель
+        </th>
+        <th>
+            Дата печати
+        </th>
+        <th>
+            Количество в библиотеке
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publisher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Описание", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
