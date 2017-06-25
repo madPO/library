@@ -1,4 +1,13 @@
-﻿@model IEnumerable<application.Models.IssuedBooks>
+﻿@using Microsoft.AspNet.Identity;
+@using application.Models;
+@using application.Models.NHibernate;
+@using NHibernate;
+@{int id = 1;}
+@using (ISession session = new NHibernateHelper().OpenSession())
+{
+    id = User.Identity.IsAuthenticated ? session.QueryOver<Users>().List().Where(u => u.Id.ToString() == User.Identity.GetUserId()).SingleOrDefault().Group.Id : 1;
+}
+@model IEnumerable<application.Models.IssuedBooks>
 
 @{
     ViewBag.Title = "Список выданных книг";
@@ -37,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.GetEndTime)
             </td>
             <td>
-                @Html.ActionLink("Вернуть", "Return", "Books", new { issued_id = item.Id }, null)
+                @if (id == 2) { Html.ActionLink("Вернуть", "Return", "Books", new { issued_id = item.Id }, null); }
             </td>
         </tr>
     }

@@ -1,4 +1,5 @@
-﻿using application.Models;
+﻿using application.Filters;
+using application.Models;
 using application.Models.NHibernate;
 using NHibernate;
 using NHibernate.Criterion;
@@ -38,12 +39,14 @@ namespace application.Controllers
             }
         }
         [HttpGet]
+        [LibrarianActions]
         public ActionResult Users()
         {
             return View(new SearchViewUsers());
         }
 
         [HttpPost]
+        [LibrarianActions]
         public ActionResult Users(SearchViewUsers model)
         {
             using(ISession session = new NHibernateHelper().OpenSession())

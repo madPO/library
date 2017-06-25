@@ -21,7 +21,7 @@ namespace application.Controllers
                         .SingleOrDefault();
                     if(user.Group.Id == 1)
                     {
-                        return RedirectToAction("Received", "Books");
+                        return RedirectToAction("Received", "Books", new { id = user.Id });
                     }
                     else
                     {

@@ -1,4 +1,13 @@
-﻿@model application.Models.SearchViewBooks
+﻿@using Microsoft.AspNet.Identity;
+@using application.Models;
+@using application.Models.NHibernate;
+@using NHibernate;
+@{int id = 1;}
+@using (ISession session = new NHibernateHelper().OpenSession())
+{
+    id = User.Identity.IsAuthenticated ? session.QueryOver<Users>().List().Where(u => u.Id.ToString() == User.Identity.GetUserId()).SingleOrDefault().Group.Id : 1;
+}
+@model application.Models.SearchViewBooks
 
 @{
     ViewBag.Title = "Поиск по книгам";
@@ -56,11 +65,11 @@
             @Html.DisplayFor(modelItem => item.Count)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", "Books", new { id = item.Id }, null) |
+            @if (id == 2) { Html.ActionLink("Изменить", "Edit", "Books", new { id = item.Id }, null); } |
             @Html.ActionLink("Описание", "Details", "Books", new { id = item.Id }, null) |
             @Html.ActionLink("Встать в очередь", "Add", "Queue", new { id = item.Id }, null) |
-            @Html.ActionLink("Выдать книгу", "Index", "Received", new { id = item.Id }, null) |
-            @Html.ActionLink("Удалить", "Delete", "Books", new { id = item.Id }, null)
+            @if (id == 2) { Html.ActionLink("Выдать книгу", "Index", "Received", new { id = item.Id }, null); } |
+            @if (id == 2) { Html.ActionLink("Удалить", "Delete", "Books", new { id = item.Id }, null); }
         </td>
     </tr>
 }

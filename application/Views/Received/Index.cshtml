@@ -1,4 +1,13 @@
-﻿@model application.Models.ReceivedViewModel
+﻿@using Microsoft.AspNet.Identity;
+@using application.Models;
+@using application.Models.NHibernate;
+@using NHibernate;
+@{int id = 1;}
+@using (ISession session = new NHibernateHelper().OpenSession())
+{
+    id = User.Identity.IsAuthenticated ? session.QueryOver<Users>().List().Where(u => u.Id.ToString() == User.Identity.GetUserId()).SingleOrDefault().Group.Id : 1;
+}
+@model application.Models.ReceivedViewModel
 
 @{
     ViewBag.Title = "Выдать книгу";
@@ -53,7 +62,7 @@ else
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    @Html.ActionLink("Выдать", "Add", new { user_id = item.Id, books_id = Model.Book.Id })
+                    @if (id == 2) { Html.ActionLink("Выдать", "Add", new { user_id = item.Id, books_id = Model.Book.Id }); }
                 </td>
             </tr>
         }

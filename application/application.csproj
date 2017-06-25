@@ -145,6 +145,7 @@
     <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\ReceivedController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Filters\LibrarianActions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -4,13 +4,13 @@ using application.Models.NHibernate;
 using application.Models;
 using System.Collections.Generic;
 using System.Linq;
+using application.Filters;
 
 namespace application.Controllers
 {
     [Authorize]
     public class BooksController : Controller
     {
-        // GET: Books
         public ActionResult Index()
         {
             using (ISession session = new NHibernateHelper().OpenSession())
@@ -31,6 +31,7 @@ namespace application.Controllers
         }
 
         // GET: Books/Create
+        [LibrarianActions]
         public ActionResult Create()
         {
             return View();
@@ -38,6 +39,7 @@ namespace application.Controllers
 
         // POST: Books/Create
         [HttpPost]
+        [LibrarianActions]
         public ActionResult Create(BooksViewCreate model)
         {
             if (ModelState.IsValid)
@@ -60,6 +62,7 @@ namespace application.Controllers
         }
 
         // GET: Books/Edit/5
+        [LibrarianActions]
         public ActionResult Edit(int id)
         {
             using (ISession session = new NHibernateHelper().OpenSession())
@@ -71,6 +74,7 @@ namespace application.Controllers
 
         // POST: Books/Edit/5
         [HttpPost]
+        [LibrarianActions]
         public ActionResult Edit(int id, Books model)
         {
             if (ModelState.IsValid)
@@ -93,6 +97,7 @@ namespace application.Controllers
         }
 
         // GET: Books/Delete/5
+        [LibrarianActions]
         public ActionResult Delete(int id)
         {
             using (ISession session = new NHibernateHelper().OpenSession())
@@ -119,7 +124,7 @@ namespace application.Controllers
                 return View(books);
             }
         }
-
+        [LibrarianActions]
         public ActionResult Return(int issued_id)
         {
             using (ISession session = new NHibernateHelper().OpenSession())

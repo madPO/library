@@ -1,4 +1,5 @@
-﻿using application.Models;
+﻿using application.Filters;
+using application.Models;
 using application.Models.NHibernate;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -36,7 +37,7 @@ namespace application.Controllers
             }
             return View(model);
         }
-
+        [LibrarianActions]
         public ActionResult Register()
         {
             RegisterViewModel model = new RegisterViewModel();
@@ -45,6 +46,7 @@ namespace application.Controllers
             return View(model);
         }
         [HttpPost]
+        [LibrarianActions]
         public ActionResult Register(RegisterViewModel model)
         {
             ISession session = new NHibernateHelper().OpenSession();
@@ -56,7 +58,6 @@ namespace application.Controllers
                 var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {
-                    SignInManager.SignIn(user, false, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -78,7 +79,7 @@ namespace application.Controllers
             SignInManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
+        [LibrarianActions]
         public ActionResult Index()
         {
             using (ISession session = new NHibernateHelper().OpenSession())
@@ -91,6 +92,7 @@ namespace application.Controllers
             }
         }
         [HttpGet]
+        [LibrarianActions]
         public ActionResult Edit(int id)
         {
             using (ISession session = new NHibernateHelper().OpenSession())
@@ -105,6 +107,7 @@ namespace application.Controllers
             }
         }
         [HttpPost]
+        [LibrarianActions]
         public ActionResult Edit(int id, RegisterViewModel model)
         {
             try
@@ -129,7 +132,7 @@ namespace application.Controllers
                 return View(model);
             }
         }
-
+        [LibrarianActions]
         public ActionResult Delete(int id)
         {
             using (ISession session = new NHibernateHelper().OpenSession())

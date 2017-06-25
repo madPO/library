@@ -1,4 +1,5 @@
-﻿using application.Models;
+﻿using application.Filters;
+using application.Models;
 using application.Models.NHibernate;
 using Microsoft.AspNet.Identity;
 using NHibernate;
@@ -14,6 +15,7 @@ namespace application.Controllers
     public class ReceivedController : Controller
     {
         [HttpGet]
+        [LibrarianActions]
         public ActionResult Index(int id)
         {
             using(ISession session = new NHibernateHelper().OpenSession())
@@ -28,6 +30,7 @@ namespace application.Controllers
             }
         }
         [HttpPost]
+        [LibrarianActions]
         public ActionResult Index(int id, ReceivedViewModel model)
         {
             using (ISession session = new NHibernateHelper().OpenSession())
@@ -39,7 +42,7 @@ namespace application.Controllers
                 return View(model);
             }
         }
-
+        [LibrarianActions]
         public ActionResult Add(int user_id, int books_id)
         {
             using (ISession session = new NHibernateHelper().OpenSession())

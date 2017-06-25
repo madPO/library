@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+@using application.Models;
+@using application.Models.NHibernate;
+@using NHibernate;
+@{int id = 1;}
+@using (ISession session = new NHibernateHelper().OpenSession())
+{
+    id = User.Identity.IsAuthenticated?session.QueryOver<Users>().List().Where(u => u.Id.ToString() == User.Identity.GetUserId()).SingleOrDefault().Group.Id:1;
+}
+<html>
 <head>
     <meta charset="utf-8">
     <title>@ViewBag.Title - Библиотека</title>
@@ -11,13 +20,16 @@
                 <div class="top-bar-left">
                     <ul class="dropdown menu" data-dropdown-menu>
                         <li><a href="http://localhost:56279/">Главная</a></li>
-                        <li>
-                            <a href="javascript:false;">Регистрация</a>
-                            <ul class="menu vertical">
-                                <li><a href="http://localhost:56279/Account/Register">Регистрация пользователя</a></li>
-                                <li><a href="http://localhost:56279/Books/Create">Регистрация книги</a></li>
-                            </ul>
-                        </li>
+                        @if (id == 2)
+                        {
+                            <li>
+                                <a href="javascript:false;">Регистрация</a>
+                                <ul class="menu vertical">
+                                    <li><a href="http://localhost:56279/Account/Register">Регистрация пользователя</a></li>
+                                    <li><a href="http://localhost:56279/Books/Create">Регистрация книги</a></li>
+                                </ul>
+                            </li>
+                        }
                         <li>
                             <a href="javascript:false;">Книги</a>
                             <ul class="menu vertical">
@@ -30,7 +42,10 @@
                             <a href="javascript:false;">Поиск</a>
                             <ul class="menu vertical">
                                 <li><a href="http://localhost:56279/Search/Books">Поиск книг</a></li>
-                                <li><a href="http://localhost:56279/Search/Users">Поиск пользователей</a></li>
+                                @if (id == 2)
+                                {
+                                    <li><a href="http://localhost:56279/Search/Users">Поиск пользователей</a></li>
+                                }
                             </ul>
                         </li>
                         <li><a href="http://localhost:56279/Account/LogOff">Выход</a></li>
