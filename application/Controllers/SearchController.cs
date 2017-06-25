@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace application.Controllers
 {
+    [Authorize]
     public class SearchController : Controller
     {
         [HttpGet]

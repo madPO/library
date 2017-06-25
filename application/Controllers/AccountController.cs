@@ -10,13 +10,16 @@ using System.Web.Mvc;
 
 namespace application.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
             if (ModelState.IsValid)

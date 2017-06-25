@@ -4,8 +4,6 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Login</h2>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary()
@@ -20,7 +18,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><button style="width: 100%">Login</button></td>
+            <td><button class="success button">Login</button></td>
         </tr>
     </table>
 }

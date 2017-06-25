@@ -4,12 +4,7 @@
     ViewBag.Title = "Описание книги";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
 <div>
-    <h4>Books</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             Название
@@ -63,6 +58,6 @@
 </div>
 <p>
     @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Встать в очередь", "Add","Queue", new { id = Model.Id }, null)
+    @Html.ActionLink("Встать в очередь", "Add","Queue", new { id = Model.Id }, null) |
     @Html.ActionLink("Назад", "Index")
 </p>

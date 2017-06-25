@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace application.Controllers
 {
+    [Authorize]
     public class ReceivedController : Controller
     {
         [HttpGet]

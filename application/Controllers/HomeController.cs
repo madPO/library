@@ -1,21 +1,38 @@
 ﻿using System;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using application.Models.NHibernate;
+using NHibernate;
+using application.Models;
+using System.Linq;
 
 namespace application.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
         public ActionResult Index()
         {
-            //return "Hello, Workd!";
-            return View();
-        }
-
-        public String Test()
-        {
-            return User.Identity.GetUserId();
+            if (User.Identity.IsAuthenticated)
+            {
+                using (ISession session = new NHibernateHelper().OpenSession())
+                {
+                    Users user = session.QueryOver<Users>().List()
+                        .Where(u => u.Id.ToString() == User.Identity.GetUserId())
+                        .SingleOrDefault();
+                    if(user.Group.Id == 1)
+                    {
+                        return RedirectToAction("Received", "Books");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Books", "Search");
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login","Account");
+            } 
         }
     }
 }

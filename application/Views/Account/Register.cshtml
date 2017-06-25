@@ -4,12 +4,10 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Регистрация нового пользователя</h2>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary()
-    <table>
+    <table class="hover">
         <tr>
             <td>@Html.LabelFor(m => m.UserName)</td>
             <td>@Html.EditorFor(m => m.UserName)</td>
@@ -38,9 +36,6 @@
             <td>@Html.LabelFor(m => m.group_id)</td>
             <td>@Html.DropDownListFor(m => m.group_id, Model.Groups, "Выберите группу пользователя")</td>
         </tr>
-        <tr>
-            <td></td>
-            <td><button style="width: 100%">Register</button></td>
-        </tr>
     </table>
+    <button class="success button">Регистрация</button>
 }

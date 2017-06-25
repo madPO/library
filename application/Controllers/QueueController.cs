@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace application.Controllers
 {
+    [Authorize]
     public class QueueController : Controller
     {
         public ActionResult Add(int id)

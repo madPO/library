@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace application.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         // GET: Books

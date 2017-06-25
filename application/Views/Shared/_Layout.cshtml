@@ -8,18 +8,47 @@
     <div class="top-bar">
         <div class="top-bar-title"><strong>@ViewBag.Title - Библиотека</strong></div>
         <div>
-            <div class="top-bar-left">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <li><a href="http://localhost:56279/">Главная</a></li>
-                </ul>
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li><a href="http://localhost:56279/">Главная</a></li>
+                        <li>
+                            <a href="javascript:false;">Регистрация</a>
+                            <ul class="menu vertical">
+                                <li><a href="http://localhost:56279/Account/Register">Регистрация пользователя</a></li>
+                                <li><a href="http://localhost:56279/Books/Create">Регистрация книги</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:false;">Книги</a>
+                            <ul class="menu vertical">
+                                <li><a href="http://localhost:56279/Books">Список книг</a></li>
+                                <li><a href="http://localhost:56279/Queue">Забронированные книги</a></li>
+                                <li><a href="http://localhost:56279/Received/List">Выданные книги</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:false;">Поиск</a>
+                            <ul class="menu vertical">
+                                <li><a href="http://localhost:56279/Search/Books">Поиск книг</a></li>
+                                <li><a href="http://localhost:56279/Search/Users">Поиск пользователей</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="http://localhost:56279/Account/LogOff">Выход</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right"></div>
             </div>
-            <div class="top-bar-right"></div>
-        </div>
     </div>
     <div class="row">
         @RenderBody()
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
+    <script>
+          $(document).ready(function () {
+              $(document).foundation();
+          });
+    </script>
+
 </body>
 </html>
