@@ -1,0 +1,63 @@
+﻿@model application.Models.ReceivedViewModel
+
+@{
+    ViewBag.Title = "Выдать книгу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.ValidationSummary()
+@if(Model.Count - 1 < 0)
+{
+    <h3>Книги нет в наличие, ее невозможно выдать.</h3>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        <div class="row">
+            <label class="medium-10 columns">
+                Имя пользователя
+                @Html.EditorFor(m => m.Name)
+            </label>
+            <button style="width: 100%">Поиск</button>
+        </div>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                Идентификатор пользователя
+            </th>
+            <th>
+                Имя пользователя
+            </th>
+            <th>
+                Адрес
+            </th>
+            <th>
+                Телефон
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.ActionLink("Выдать", "Add", new { user_id = item.Id, books_id = Model.Book.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

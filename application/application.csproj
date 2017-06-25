@@ -142,6 +142,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QueueController.cs" />
+    <Compile Include="Controllers\ReceivedController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -150,10 +152,14 @@
     <Compile Include="Models\BooksViewCreate.cs" />
     <Compile Include="Models\Groups.cs" />
     <Compile Include="Models\IdentityStore.cs" />
+    <Compile Include="Models\IssuedBooks.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\NHibernate\NHibernateHelper.cs" />
+    <Compile Include="Models\QueueForBooks.cs" />
+    <Compile Include="Models\ReceivedViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\SearchViewBooks.cs" />
+    <Compile Include="Models\SearchViewUsers.cs" />
     <Compile Include="Models\SignInManager.cs" />
     <Compile Include="Models\UserManager.cs" />
     <Compile Include="Models\Users.cs" />
@@ -173,6 +179,11 @@
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Search\Books.cshtml" />
+    <Content Include="Views\Queue\Index.cshtml" />
+    <Content Include="Views\Received\Index.cshtml" />
+    <Content Include="Views\Received\List.cshtml" />
+    <Content Include="Views\Search\Users.cshtml" />
+    <Content Include="Views\Books\Received.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

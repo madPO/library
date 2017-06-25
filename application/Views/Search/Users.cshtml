@@ -1,0 +1,54 @@
+﻿@model application.Models.SearchViewUsers
+
+@{
+    ViewBag.Title = "Поиск пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <label class="medium-10 columns">
+            Поиск по имени
+            @Html.EditorFor(m => m.Name)
+        </label>
+        <button style="width: 100%">Поиск</button>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Имя пользователя
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Идентификатор
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.ActionLink("Список выданных книг", "Received", "Books", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>

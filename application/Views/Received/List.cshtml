@@ -1,0 +1,41 @@
+﻿@model IEnumerable<application.Models.IssuedBooks>
+
+@{
+    ViewBag.Title = "Список выданных книг";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Название книги
+        </th>
+        <th>
+            Автор
+        </th>
+        <th>
+            Дата получения книги
+        </th>
+        <th>
+            Дата возврата книги
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GetBeginTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GetEndTime)
+        </td>
+    </tr>
+}
+
+</table>

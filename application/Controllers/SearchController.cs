@@ -3,6 +3,7 @@ using application.Models.NHibernate;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace application.Controllers
@@ -34,6 +35,22 @@ namespace application.Controllers
                 }
                 return View(model);
             }
+        }
+        [HttpGet]
+        public ActionResult Users()
+        {
+            return View(new SearchViewUsers());
+        }
+
+        [HttpPost]
+        public ActionResult Users(SearchViewUsers model)
+        {
+            using(ISession session = new NHibernateHelper().OpenSession())
+            {
+                model.Users = session.QueryOver<Users>().Where(u => u.Name.IsLike(model.Name, MatchMode.Anywhere)).List();
+                return View(model);
+            }
+            
         }
     }
 }

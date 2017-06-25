@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using application.Models.NHibernate;
 using application.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace application.Controllers
 {
@@ -100,6 +101,34 @@ namespace application.Controllers
                 session.Flush();
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Received(int id)
+        {
+            using (ISession session = new NHibernateHelper().OpenSession())
+            {
+                Users user = session.QueryOver<Users>()
+                    .List()
+                    .Where(u => u.Id == id)
+                    .SingleOrDefault();
+                IEnumerable<IssuedBooks> books = session.QueryOver<IssuedBooks>()
+                    .Where(b => b.User == user && b.Relevance)
+                    .JoinQueryOver(b => b.Book)
+                    .List();
+                return View(books);
+            }
+        }
+
+        public ActionResult Return(int issued_id)
+        {
+            using (ISession session = new NHibernateHelper().OpenSession())
+            {
+                IssuedBooks book = session.QueryOver<IssuedBooks>().Where(i => i.Id == issued_id).SingleOrDefault();
+                book.Relevance = false;
+                session.Update(book);
+                session.Flush();
+                return Redirect(Request.UrlReferrer.ToString());
+            }
         }
     }
 }

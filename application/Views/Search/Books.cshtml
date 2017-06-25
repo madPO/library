@@ -58,6 +58,8 @@
         <td>
             @Html.ActionLink("Изменить", "Edit", "Books", new { id = item.Id }, null) |
             @Html.ActionLink("Описание", "Details", "Books", new { id = item.Id }, null) |
+            @Html.ActionLink("Встать в очередь", "Add", "Queue", new { id = item.Id }, null) |
+            @Html.ActionLink("Выдать книгу", "Index", "Received", new { id = item.Id }, null) |
             @Html.ActionLink("Удалить", "Delete", "Books", new { id = item.Id }, null)
         </td>
     </tr>
